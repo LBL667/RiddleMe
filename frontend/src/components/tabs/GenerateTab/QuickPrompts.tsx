@@ -18,7 +18,7 @@ export default function QuickPrompts() {
           key={text}
           type="button"
           onClick={() => setInputDraft(text)}
-          className="flex items-center gap-2 rounded-lg border border-line bg-white px-4 py-3 text-left text-[13px] text-ink-2 transition-all hover:-translate-y-px hover:border-primary/50 hover:text-primary hover:shadow-[0_4px_12px_rgba(30,111,255,0.10)]"
+          className="flex items-center gap-2 rounded-lg border border-line bg-white px-4 py-3 text-left text-[14px] text-ink-2 transition-all hover:-translate-y-px hover:border-primary/50 hover:text-primary hover:shadow-[0_4px_12px_rgba(30,111,255,0.10)]"
         >
           <Icon size={15} className="shrink-0 text-primary" />
           <span className="truncate">{text}</span>

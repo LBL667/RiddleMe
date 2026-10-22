@@ -14,6 +14,14 @@
 
   --font-sans: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", Arial, sans-serif;
 
+  /* 整体字号上调：覆盖默认字号 token */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.125rem;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.375rem;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.5625rem;
+
   --animate-float: float 3.2s ease-in-out infinite;
   --animate-float-delay: float 3.8s ease-in-out 0.6s infinite;
   --animate-dot: dot-bounce 1.2s ease-in-out infinite;
@@ -96,7 +104,7 @@ input[type="number"] {
 
 /* KaTeX 公式与正文对齐 */
 .katex {
-  font-size: 1.06em;
+  font-size: 1.1em;
 }
 .katex-display {
   margin: 0.2em 0;

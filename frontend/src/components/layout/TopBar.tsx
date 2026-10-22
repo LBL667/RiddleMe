@@ -5,7 +5,7 @@ export default function TopBar() {
     <header className="z-20 flex h-14 shrink-0 items-center justify-between border-b border-line/80 bg-white px-5">
       <div className="flex items-center gap-2">
         <GraduationCap size={26} strokeWidth={2.2} className="text-primary" />
-        <h1 className="text-[19px] font-bold tracking-wide text-ink">出题智能体</h1>
+        <h1 className="text-[20px] font-bold tracking-wide text-ink">出题智能体</h1>
       </div>
       <div className="flex items-center gap-4">
         <button

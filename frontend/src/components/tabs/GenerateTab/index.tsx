@@ -15,7 +15,7 @@ export default function GenerateTab() {
         {showWelcome ? (
           <div className="flex h-full flex-col items-center justify-center px-8 pb-4">
             <RobotAvatar />
-            <h2 className="mt-4 text-[22px] font-bold text-ink">你好，我是AI出题助手</h2>
+            <h2 className="mt-4 text-[24px] font-bold text-ink">你好，我是AI出题助手</h2>
             <p className="mt-3 max-w-[460px] text-center text-sm leading-6 text-ink-2">
               我可以根据你的需求，结合知识库内容，为你生成高质量的试题。
               <br />
@@ -24,19 +24,19 @@ export default function GenerateTab() {
             <QuickPrompts />
           </div>
         ) : (
-          <div className="mx-auto flex w-full max-w-[680px] flex-col gap-4 px-6 py-6">
+          <div className="mx-auto flex w-full max-w-[880px] flex-col gap-4 px-8 py-6">
             {messages.map((m) => (
               <div key={m.id} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className={`flex max-w-[80%] items-start gap-2 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}>
                   <span
-                    className={`mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs ${
+                    className={`mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm ${
                       m.role === 'user' ? 'bg-primary font-semibold text-white' : 'bg-primary-light text-primary'
                     }`}
                   >
-                    {m.role === 'user' ? '张' : <Bot size={15} />}
+                    {m.role === 'user' ? '张' : <Bot size={16} />}
                   </span>
                   <div
-                    className={`rounded-2xl px-4 py-2.5 text-sm leading-6 ${
+                    className={`rounded-2xl px-4 py-2.5 text-[15px] leading-7 ${
                       m.role === 'user'
                         ? 'rounded-tr-sm bg-primary text-white'
                         : 'rounded-tl-sm border border-line bg-white text-ink'

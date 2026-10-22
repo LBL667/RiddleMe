@@ -18,7 +18,7 @@ export default function AnswerPanel({ q, editing, expanded, onToggle, onChange }
       <button
         type="button"
         onClick={onToggle}
-        className="flex w-full items-center gap-1 px-3 py-2 text-[13px] font-medium text-ink-2 transition-colors hover:text-primary"
+        className="flex w-full items-center gap-1 px-3 py-2 text-[14px] font-medium text-ink-2 transition-colors hover:text-primary"
       >
         {expanded ? <ChevronDown size={15} /> : <ChevronRight size={15} />}
         答案与解析

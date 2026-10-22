@@ -1,9 +1,15 @@
+import { useRef, useState } from 'react'
+import type { MouseEvent as ReactMouseEvent } from 'react'
 import { ChevronsLeft, ChevronsRight, FileText, Loader2, Sparkles } from 'lucide-react'
 import { useApp } from '../../store/AppContext'
 import { DIFFICULTIES, TYPE_LABELS, TYPE_ORDER } from '../../constants'
 import Dropdown from '../ui/Dropdown'
 
-/** 右侧「题目参数」面板：仅出现在智能生成标签页，可向右折叠 */
+/** 面板宽度拖拽范围：默认最宽，只能向左收窄 */
+const PANEL_MIN_WIDTH = 220
+const PANEL_MAX_WIDTH = 300
+
+/** 右侧「题目参数」面板：仅出现在智能生成标签页，可向右折叠，左缘可拖拽调宽 */
 export default function ParamsSidebar() {
   const {
     paramsCollapsed,
@@ -21,6 +27,34 @@ export default function ParamsSidebar() {
     generating,
     generate,
   } = useApp()
+
+  // 拖拽调宽：手柄在面板左缘，向右拖变窄，向左拖变宽（上限即默认宽度）
+  const [panelWidth, setPanelWidth] = useState(PANEL_MAX_WIDTH)
+  const [dragging, setDragging] = useState(false)
+  const dragStart = useRef({ x: 0, width: PANEL_MAX_WIDTH })
+
+  const startResize = (e: ReactMouseEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    dragStart.current = { x: e.clientX, width: panelWidth }
+    setDragging(true)
+    document.body.style.userSelect = 'none'
+    document.body.style.cursor = 'col-resize'
+
+    const onMove = (ev: MouseEvent) => {
+      ev.preventDefault()
+      const next = dragStart.current.width + (dragStart.current.x - ev.clientX)
+      setPanelWidth(Math.min(PANEL_MAX_WIDTH, Math.max(PANEL_MIN_WIDTH, next)))
+    }
+    const onUp = () => {
+      setDragging(false)
+      document.body.style.userSelect = ''
+      document.body.style.cursor = ''
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('mouseup', onUp)
+    }
+    window.addEventListener('mousemove', onMove)
+    window.addEventListener('mouseup', onUp)
+  }
 
   // 折叠态：右侧细条，点击展开
   if (paramsCollapsed) {
@@ -46,10 +80,21 @@ export default function ParamsSidebar() {
   }
 
   return (
-    <aside className="z-10 my-4 mr-4 flex w-[300px] shrink-0 flex-col overflow-hidden rounded-2xl border border-line/70 bg-white shadow-[0_6px_24px_rgba(30,90,180,0.06)] transition-all duration-300">
+    <aside
+      className={`relative z-10 my-4 mr-4 flex shrink-0 flex-col overflow-hidden rounded-2xl border border-line/70 bg-white shadow-[0_6px_24px_rgba(30,90,180,0.06)] ${dragging ? '' : 'transition-all duration-300'}`}
+      style={{ width: panelWidth }}
+    >
+      {/* 拖拽调宽手柄 */}
+      <div
+        onMouseDown={startResize}
+        title="拖动调整面板宽度"
+        className={`absolute top-0 bottom-0 left-0 z-20 w-1.5 cursor-col-resize transition-colors ${
+          dragging ? 'bg-primary/70' : 'bg-transparent hover:bg-primary/30'
+        }`}
+      />
       {/* 面板头部 */}
       <div className="flex items-center justify-between border-b border-line px-5 py-4">
-        <div className="flex items-center gap-2 text-[16px] font-bold text-ink">
+        <div className="flex items-center gap-2 text-[17px] font-bold text-ink">
           <FileText size={18} className="text-primary" />
           题目参数
         </div>
@@ -80,7 +125,7 @@ export default function ParamsSidebar() {
                   <button
                     type="button"
                     onClick={() => selectDoc(d.id)}
-                    className={`flex w-full items-center gap-2.5 rounded-lg border px-3 py-2.5 text-left text-[13px] transition-colors ${
+                    className={`flex w-full items-center gap-2.5 rounded-lg border px-3 py-2.5 text-left text-[14px] transition-colors ${
                       selected
                         ? 'border-primary/50 bg-primary-weak'
                         : 'border-line bg-white hover:border-primary/40'
@@ -160,7 +205,7 @@ export default function ParamsSidebar() {
           type="button"
           disabled={generating}
           onClick={() => void generate()}
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3 text-[15px] font-semibold text-white shadow-[0_4px_14px_rgba(30,111,255,0.35)] transition-all hover:bg-[#1a5fe6] active:scale-[0.98] disabled:opacity-60"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3 text-[16px] font-semibold text-white shadow-[0_4px_14px_rgba(30,111,255,0.35)] transition-all hover:bg-[#1a5fe6] active:scale-[0.98] disabled:opacity-60"
         >
           {generating ? <Loader2 size={17} className="animate-spin" /> : <Sparkles size={17} />}
           {generating ? '生成中…' : '生成题目'}

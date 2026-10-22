@@ -19,7 +19,7 @@ export default function TabBar() {
             key={key}
             type="button"
             onClick={() => setActiveTab(key)}
-            className={`relative flex items-center gap-1.5 py-3.5 text-[15px] transition-colors ${
+            className={`relative flex items-center gap-1.5 py-3.5 text-[16px] transition-colors ${
               active ? 'font-semibold text-primary' : 'text-ink-2 hover:text-primary'
             }`}
           >

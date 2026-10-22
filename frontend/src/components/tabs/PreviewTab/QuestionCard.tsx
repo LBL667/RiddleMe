@@ -80,7 +80,7 @@ export default function QuestionCard({ q, index }: Props) {
             onChange={() => toggleSelect(q.id)}
             className="h-4 w-4 accent-primary"
           />
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-page text-[15px] font-semibold text-ink-2">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-page text-[16px] font-semibold text-ink-2">
             {index}
           </span>
           <button
@@ -110,7 +110,7 @@ export default function QuestionCard({ q, index }: Props) {
               className="mt-2.5 block w-full rounded-lg border border-primary/40 bg-primary-weak/40 p-2.5 text-sm leading-6 text-ink outline-none focus:border-primary"
             />
           ) : (
-            <p className="mt-2 text-[15px] font-medium leading-7 text-ink">
+            <p className="mt-2 text-[16px] font-medium leading-7 text-ink">
               <Latex text={q.stem} />
             </p>
           )}

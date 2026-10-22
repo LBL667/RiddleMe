@@ -119,7 +119,7 @@ function Pill({ label, active, onClick }: { label: string; active: boolean; onCl
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-lg px-3.5 py-1.5 text-[13px] transition-colors ${
+      className={`rounded-lg px-3.5 py-1.5 text-[14px] transition-colors ${
         active
           ? 'bg-primary font-medium text-white shadow-[0_2px_8px_rgba(30,111,255,0.30)]'
           : 'border border-line bg-white text-ink-2 hover:border-primary/50 hover:text-primary'
