@@ -1,0 +1,11 @@
+# 依赖与构建产物
+node_modules/
+dist/
+
+# 工作区内部数据
+.workbuddy/
+
+# 本地环境与临时文件
+*.local
+.DS_Store
+.playwright-cli/
